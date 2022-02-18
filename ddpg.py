@@ -65,7 +65,7 @@ class Buffer:
         self.reward_buffer = np.zeros((self.buffer_capacity, 1))
         self.next_state_buffer = np.zeros((self.buffer_capacity, num_states))
 
-    # Takes (s,a,r,s') obervation tuple as input
+    # Takes (s,a,r,s') observation tuple as input
     def record(self, obs_tuple):
         # Set index to zero if buffer_capacity is exceeded,
         # replacing old records
@@ -162,7 +162,7 @@ def get_critic():
     action_input = layers.Input(shape=num_actions)
     action_out = layers.Dense(32, activation="relu")(action_input)
 
-    # Both are passed through seperate layer before concatenating
+    # Both are passed through separate layer before concatenating
     concat = layers.Concatenate()([state_out, action_out])
 
     out = layers.Dense(256, activation="relu")(concat)
@@ -235,7 +235,7 @@ for ep in range(total_episodes):
         tf_prev_state = tf.expand_dims(tf.convert_to_tensor(prev_state), 0)
 
         action = policy(tf_prev_state, ou_noise)
-        # Recieve state and reward from environment.
+        # Receive state and reward from environment.
         state, reward, done, info = env.step(action)
 
         buffer.record((prev_state, action, reward, state))
@@ -262,5 +262,5 @@ for ep in range(total_episodes):
 # Episodes versus Avg. Rewards
 plt.plot(avg_reward_list)
 plt.xlabel("Episode")
-plt.ylabel("Avg. Epsiodic Reward")
+plt.ylabel("Avg. Episodic Reward")
 plt.show()
