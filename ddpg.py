@@ -154,12 +154,12 @@ def get_actor():
 
 def get_critic():
     # State as input
-    state_input = layers.Input(shape=(num_states))
+    state_input = layers.Input(shape=num_states)
     state_out = layers.Dense(16, activation="relu")(state_input)
     state_out = layers.Dense(32, activation="relu")(state_out)
 
     # Action as input
-    action_input = layers.Input(shape=(num_actions))
+    action_input = layers.Input(shape=num_actions)
     action_out = layers.Dense(32, activation="relu")(action_input)
 
     # Both are passed through seperate layer before concatenating
